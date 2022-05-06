@@ -15,23 +15,25 @@ aula_musica = ["Erik", "Carlos", "Maria"]
 aula_danca = ["Gustavo","Sofia","Joana","Antonio"]
 
 # Listar alunos em cada atividade por sala
-lista_classes = [aula_ingles, aula_musica, aula_danca]
-lista_classes_txt = ["Aula de Inglês","Aula de Música","Aula de Dança"]
+atividades = [
+                ("Inglês",aula_ingles),
+                ("Música", aula_musica),
+                ("Dança", aula_danca),
+            ]
 
-for classe in range(len(lista_classes)):
+for nome, atividade in atividades:
 
-    alunos_sala_1 = []
-    alunos_sala_2 = []
-    aluno_ausentes = []
+    atividade_sala_1 = []
+    atividade_sala_2 = []
 
-    print("-->",lista_classes_txt[classe])
+    print(nome)
 
-    for aluno in lista_classes[classe]:
+    for aluno in atividade:
         if aluno in sala1:
-            alunos_sala_1.append(aluno)
+            atividade_sala_1.append(aluno)
         elif aluno in sala2:
-            alunos_sala_2.append(aluno)
+            atividade_sala_2.append(aluno)
 
-    print('Sala 1 ---> ', alunos_sala_1)
-    print('Sala 2 --->', alunos_sala_2)
+    print('Sala 1 ---> ', atividade_sala_1)
+    print('Sala 2 --->', atividade_sala_2)
 
