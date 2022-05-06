@@ -35,5 +35,5 @@ for nome, atividade in atividades:
             atividade_sala_2.append(aluno)
 
     print('Sala 1 ---> ', atividade_sala_1)
-    print('Sala 2 --->', atividade_sala_2)
+    print('Sala 2 ---> ', atividade_sala_2)
 
