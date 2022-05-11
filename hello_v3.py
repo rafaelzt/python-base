@@ -10,6 +10,10 @@ You should have env var LANG setted
 
     export LANG=pt_BR
 
+Or pass as CLI argument `--lang`
+
+Or type LANG in the input
+
 Execution:
     python3 hello.py
     or
