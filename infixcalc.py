@@ -33,17 +33,25 @@ import sys
 
 def main():
     args = sys.argv[1:]
-    if len(args) != 3:
-        args.append(input("Digite uma operação: "))
-        args.append(int(input("Digite um numero [n1]: ")))
-        args.append(int(input("Digite um numero [n2]: ")))
+    valid_operations = ("sum", "sub", "mul", "div") 
+
+    if not args:
+        operation = args.append(input("Digite uma operação: "))
+        n1 = args.append(int(input("Digite um numero [n1]: ")))
+        n2 = args.append(int(input("Digite um numero [n2]: ")))
+    elif len(args) != 3:
+        print("Numero de argumentos invalidos")
+        print("ex: `sum 5 5`")
+        sys.exit(1)
+
+    operation, n1, n2 = args
+
+    if operation not in valid_operations:
+        print("Operacao invalida")
+        print(valid_operations)
+        sys.exit(1)
     else:
-        args[0] = (args[0])
-        args[1] = (int(args[1]))
-        args[2] = (int(args[2]))
-    calcula(args[0],args[1],args[2])
-
-
+        calcula(operation, int(n1), int(n2))
 
 
 def calcula(operacao, n1, n2):
@@ -56,8 +64,8 @@ def calcula(operacao, n1, n2):
             print(n1*n2)
         case "div":
             print(n1/n2)
-        case default:
-            print("Invalid data!")
+
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()
