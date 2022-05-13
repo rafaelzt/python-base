@@ -26,6 +26,22 @@ __license__ = "Unlicense"
 
 import os
 import sys
+import logging
+
+log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
+
+log = logging.Logger(__name__, log_level)
+# level
+ch = logging.StreamHandler() # Console Handler
+ch.setLevel(logging.DEBUG)
+# formatacao
+fmt = logging.Formatter(
+    "%(asctime)s %(name)s $(levelname)s "
+    "l:%(lineno)d f:%(filename)s: %(message)s"
+)
+ch.setFormatter(fmt)
+# destino
+log.addHandler(ch)
 
 print(f"{sys.argv=}")
 arguments = {
@@ -38,10 +54,9 @@ for arg in sys.argv[1:]:
         key, value = (arg.split('='))
     except ValueError as e:
         # TODO: Use logging
-        print(f"[Err] {str(e)}")
-        print(f"You have to use `=`")
-        print(f"You passed {arg}")
-        print("try to use --key=value")
+        log.error("You have to use `=`, you passed %s, try --key=value %s", 
+                  arg,
+                  str(e))
         print()
         sys.exit(1)
 
