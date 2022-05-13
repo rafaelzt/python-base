@@ -34,15 +34,25 @@ arguments = {
 }
 
 for arg in sys.argv[1:]:
-    # TODO: Tratar ValueError
-    key, value = (arg.split('='))
+    try:
+        key, value = (arg.split('='))
+    except ValueError as e:
+        # TODO: Use logging
+        print(f"[Err] {str(e)}")
+        print(f"You have to use `=`")
+        print(f"You passed {arg}")
+        print("try to use --key=value")
+        print()
+        sys.exit(1)
+
     key = key.lstrip("-").strip()
     value = value.strip()
 
     if key not in arguments:
         print(f"Invalid Option `{key}`")
-        sys.exit()
+        sys.exit(1)
     arguments[key] = value
+
 
 # current_language = os.getenv("LANG", "en_US")[:5]
 current_language = arguments["lang"]
@@ -66,7 +76,25 @@ msg = {
     "fr_FR": "Bonjour Monde!"
 }
 
+
+# LBYL
+# if current_language in msg:
+#     message = msg[current_language]
+# else:
+#     print(f"Language is not valid, choose one from: \n{list(msg.keys())}")
+#     sys.exit(2)
+
+# EAFP 
+try:
+    message = msg[current_language]
+except KeyError as e:
+    print(f"[Err] {str(e)}")
+    print(f"Language is not valid, choose one from \n{list(msg.keys())}")
+    sys.exit(2)
+
+# message = msg.get(current_language, msg["en_US"])
+
 print(
-    msg[current_language] * int(arguments["count"])
+    message * int(arguments["count"])
 ) # built-in
     
