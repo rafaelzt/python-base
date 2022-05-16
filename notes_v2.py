@@ -23,7 +23,7 @@ arguments = sys.argv[1:]
 if not arguments:
     print("Invalid usage")
     print(f"you must specify subcommand {cmds}")
-    print("CLIQUE EM SHELL ACIMA E EXECUTE `python notes.py new teste")
+
     sys.exit(1)
 
 if arguments[0] not in cmds:
