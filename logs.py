@@ -3,7 +3,7 @@
 import os
 import logging
 
-log_level = os.getenv("LOG_LEVEL", "WARNING").upper()
+log_level = os.getenv("LOG_LEVEL", "INFO").upper()
 
 # BOILERPLATE
 # TODO: user função
@@ -15,7 +15,7 @@ ch = logging.StreamHandler() # Console Handler
 ch.setLevel(logging.DEBUG)
 # formatacao
 fmt = logging.Formatter(
-    "%(asctime)s %(name)s $(levelname)s "
+    "%(asctime)s %(name)s %(levelname)s "
     "l:%(lineno)d f:%(filename)s: %(message)s"
 )
 ch.setFormatter(fmt)
