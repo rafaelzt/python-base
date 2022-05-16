@@ -2,6 +2,7 @@
 
 import os
 import logging
+from logging import handlers
 
 log_level = os.getenv("LOG_LEVEL", "INFO").upper()
 
@@ -11,16 +12,25 @@ log_level = os.getenv("LOG_LEVEL", "INFO").upper()
 # nossa instancia
 log = logging.Logger(__name__, log_level)
 # level
-ch = logging.StreamHandler() # Console Handler
-ch.setLevel(logging.DEBUG)
+# ch = logging.StreamHandler() # Console/Terminal/stderr Handler
+# ch.setLevel(logging.DEBUG)
+fh = handlers.RotatingFileHandler("meulog.log", 
+                                  maxBytes=300,   # 10**6 -> 1M
+                                  backupCount=10 
+                                  )
+fh.setLevel(logging.DEBUG)
+
 # formatacao
 fmt = logging.Formatter(
     "%(asctime)s %(name)s %(levelname)s "
     "l:%(lineno)d f:%(filename)s: %(message)s"
 )
-ch.setFormatter(fmt)
+# ch.setFormatter(fmt)
+fh.setFormatter(fmt)
+
 # destino
-log.addHandler(ch)
+# log.addHandler(ch)
+log.addHandler(fh)
 
 """
 # logging # root logger // logging levels
